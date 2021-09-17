@@ -1,0 +1,4 @@
+anticaptchaofficial==1.0.31
+undetected-chromedriver==3.0.2
+webdriver-manager==3.3.0
+python-anticaptcha==0.7.1
