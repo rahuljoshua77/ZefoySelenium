@@ -33,6 +33,7 @@ opts.add_argument('--disable-blink-features=AutomationControlled')
 opts.add_experimental_option('excludeSwitches', ['enable-logging'])
 
 def get_captcha_text(png):
+
     file_list_akun = "api_key.txt"
     myfile_akun = open(f"{cwd}/{file_list_akun}","r")
     akun = myfile_akun.read()
@@ -50,7 +51,16 @@ def get_captcha_text(png):
 def open_browser():
     global browser
     browser = webdriver.Chrome(options=opts, desired_capabilities=dc)
-    menu()
+    print(f"[*] Zevoy Tiktok Bot Automation\n[*] Author: RJD")
+    try:
+        menu()
+    except Exception as e:
+        print(f"[*] Error: {e}")
+        browser.save_screenshot("ERROR_ZEFOY.png")
+        try:
+            browser.quit()
+        except:
+            pass
 
 def reload():
     browser.get("https://zefoy.com")
@@ -77,6 +87,7 @@ def reload():
     try:
         click = buttons[choice].click()
         input_videos[choice].send_keys(vid_obj)
+        input_videos[choice].send_keys(Keys.ENTER)
     except Exception as e:
         print(e)
 def menu():
@@ -88,7 +99,7 @@ def menu():
 
 
     browser.get("https://zefoy.com")
-    print(f"[*] Zevoy Tiktok Bot Automation\n[*] Author: RJD")
+    
     #check captcha
     sleep(3)
     try:
@@ -133,6 +144,10 @@ def menu():
         except:
             pass
         try:
+            wait(browser,1).until(EC.presence_of_element_located((By.XPATH,'/html/body/div[4]/div[5]/div/div/div[1]/div/form/button'))).click()
+        except:
+            pass
+        try:
             notif = wait(browser,1).until(EC.presence_of_element_located((By.XPATH, "//div[contains(text(),'Session Expired. Please Re Login! ')]")))
             print(f"[*] Session Expired, wait re-log!")
 
@@ -141,6 +156,19 @@ def menu():
             
         except:
             pass
+        try:
+            loves = wait(browser,15).until(EC.presence_of_all_elements_located((By.XPATH, '/html/body/div[4]/div[4]/div/div/form/ul/li/div/button')))
+            usernames = wait(browser,15).until(EC.presence_of_all_elements_located((By.XPATH, '//div[contains(@class,"font-weight-bold d-inline-flex kadi-rengi")]')))
+            for i in range(0,len(usernames)):
+                print(f"[*] {i}. {usernames[i].text}")
+            choice_love = int(input("[*] Input (Number):"))
+            loves[choice_love].click()
+            sleep(0.5)
+            browser.save_screenshot("LOVES.png")
+       
+        except:
+            pass
+
         sleep(0.5)
         # browser.save_screenshot("ZEFOY.png")
        
@@ -152,13 +180,7 @@ def menu():
         delay = int(minutes)+int(second)
        
         sleep(delay)
-
-    input_choice = input("[*] Back to Menu? Y/n (n = end/close)")
-    input_choice = input_choice.lower()
-    if input_choice == "y":
-        menu()
-    else:
-        browser.quit()
-
+    print("[*] Done, Finish Submit!")
+    browser.quit()
     
 open_browser()
