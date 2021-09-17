@@ -83,20 +83,38 @@ def menu():
     choice = int(input("[*] Input Choice (Number): "))
     click = buttons[choice].click()
     vid_obj = input("[*] Input Link: ")
+    loop = int(input("[*] How Many (Number): "))
+    j = 1
     input_videos[choice].send_keys(vid_obj)
-    input_videos[choice].send_keys(Keys.ENTER)
-    sleep(0.5)
-    #browser.save_screenshot("ZEFOY.png")
-    print(f"[*] Please wait 2 minutes")
-    sleep(130)
-    input_choice = input("[*] Back to Menu? Y/n (n = end/close)")
-    input_choice = input_choice.lower()
-    if input_choice == "y":
+    for i in range(0, loop):
+        input_videos[choice].send_keys(Keys.ENTER)
+        print(f"[*] Submit {j}")
+        sleep(1)
+        try:
+            wait(browser,15).until(EC.presence_of_element_located((By.XPATH,'//button[@class,"abjdt wbutton oalenus btn srthjv btn-dark jmw rounded-0 egbv font-weight-bold oxip p-2 vcndajshxpbw"]'))).click()
+        except:
+            pass
+        try:
+            notif = wait(browser,1).until(EC.presence_of_element_located((By.XPATH, "//div[contains(text(),'Session Expired. Please Re Login! ')]")))
+            print(f"[*] Session Expired, Back to main menu!")
+            menu()
+            break
+        except:
+            pass
+        sleep(0.5)
+        #browser.save_screenshot("ZEFOY.png")
+        print(f"[*] Please wait 2 minutes")
+        sleep(120)
+        input_choice = input("[*] Back to Menu? Y/n (n = end/close)")
+        input_choice = input_choice.lower()
+        if input_choice == "y":
+            menu()
+        else:
+            browser.quit()
+        print(f"[*] Please wait 2 minutes")
+        
         menu()
-    else:
-        browser.quit()
-    print(f"[*] Please wait 2 minutes")
-    
-    menu()
 
+
+    
 open_browser()
