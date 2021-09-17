@@ -30,7 +30,7 @@ opts.add_argument('--ignore-ssl-errors=yes')
 opts.add_argument("--start-maximized")
 opts.add_argument('--ignore-certificate-errors')
 opts.add_argument('--disable-blink-features=AutomationControlled')
-#opts.add_experimental_option('excludeSwitches', ['enable-logging'])
+opts.add_experimental_option('excludeSwitches', ['enable-logging'])
 
 def get_captcha_text(png):
     file_list_akun = "api_key.txt"
@@ -73,7 +73,7 @@ def menu():
         pass
     sleep(2)
     tittles = wait(browser,15).until(EC.presence_of_all_elements_located((By.XPATH, '//h5[@class="card-title"]')))
-    updates = wait(browser,15).until(EC.presence_of_all_elements_located((By.XPATH, '//small[@class="badge badge-round badge-warning d-sm-inline-block"]')))
+    updates = wait(browser,15).until(EC.presence_of_all_elements_located((By.XPATH, '//small[contains(@class,"badge badge-round badge-")]')))
     buttons = wait(browser,15).until(EC.presence_of_all_elements_located((By.XPATH, '//button[contains(@class,"btn btn-primary rounded-0 menu")]')))
     input_videos = wait(browser,15).until(EC.presence_of_all_elements_located((By.XPATH, '(//input[@placeholder="Enter Video URL"])')))
   
