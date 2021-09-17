@@ -89,6 +89,7 @@ def menu():
     for i in range(0, loop):
         input_videos[choice].send_keys(Keys.ENTER)
         print(f"[*] Submit {j}")
+        j = j+1
         sleep(1)
         try:
             wait(browser,15).until(EC.presence_of_element_located((By.XPATH,'//button[@class,"abjdt wbutton oalenus btn srthjv btn-dark jmw rounded-0 egbv font-weight-bold oxip p-2 vcndajshxpbw"]'))).click()
@@ -113,7 +114,7 @@ def menu():
             browser.quit()
         print(f"[*] Please wait 2 minutes")
         
-        menu()
+    menu()
 
 
     
