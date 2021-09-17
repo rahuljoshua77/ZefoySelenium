@@ -11,7 +11,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 import random
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
-from multiprocessing import Pool
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -98,7 +97,6 @@ def menu():
         try:
             notif = wait(browser,1).until(EC.presence_of_element_located((By.XPATH, "//div[contains(text(),'Session Expired. Please Re Login! ')]")))
             print(f"[*] Session Expired, Back to main menu!")
-            menu()
             break
         except:
             pass
@@ -106,15 +104,13 @@ def menu():
         #browser.save_screenshot("ZEFOY.png")
         print(f"[*] Please wait 2 minutes")
         sleep(120)
-        input_choice = input("[*] Back to Menu? Y/n (n = end/close)")
-        input_choice = input_choice.lower()
-        if input_choice == "y":
-            menu()
-        else:
-            browser.quit()
-        print(f"[*] Please wait 2 minutes")
-        
-    menu()
+    input_choice = input("[*] Back to Menu? Y/n (n = end/close)")
+    input_choice = input_choice.lower()
+    if input_choice == "y":
+        menu()
+    else:
+        browser.quit()
+    
 
 
     
