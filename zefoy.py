@@ -105,7 +105,7 @@ def menu():
         #tittle service
     except:
         pass
-    sleep(2)
+    sleep(5)
     tittles = wait(browser,15).until(EC.presence_of_all_elements_located((By.XPATH, '//h5[@class="card-title"]')))
     updates = wait(browser,15).until(EC.presence_of_all_elements_located((By.XPATH, '//small[contains(@class,"badge badge-round badge-")]')))
     buttons = wait(browser,15).until(EC.presence_of_all_elements_located((By.XPATH, '//button[contains(@class,"btn btn-primary rounded-0 menu")]')))
@@ -120,6 +120,8 @@ def menu():
     loop = int(input("[*] How Many (Number): "))
     j = 1
     input_videos[choice].send_keys(vid_obj)
+    input_videos[choice].send_keys(Keys.ENTER)
+    sleep(2)
     for i in range(0, loop):
         input_videos[choice].send_keys(Keys.ENTER)
         
@@ -136,7 +138,7 @@ def menu():
 
             reload()
             browser.save_screenshot("ZEFOY-1.png")
-            input_videos[choice].send_keys(Keys.ENTER)
+            
         except:
             pass
         sleep(0.5)
